@@ -5,7 +5,8 @@ const admin = require("./routes/admin")
 //Conexão com o mongo
   const mongoose= require("mongoose")
 
-  mongoose.connect("mongodb+srv://julio:96545146@cluster0.qhiu5ry.mongodb.net/Api-MemStudy?retryWrites=true&w=majority", {
+  const url = "mongodb://julio:96545146@ac-djbanuf-shard-00-00.qhiu5ry.mongodb.net:27017,ac-djbanuf-shard-00-01.qhiu5ry.mongodb.net:27017,ac-djbanuf-shard-00-02.qhiu5ry.mongodb.net:27017/Api-MemStudy?ssl=true&replicaSet=atlas-e2e8c0-shard-0&authSource=admin&retryWrites=true&w=majority" 
+  mongoose.connect(url, {
     }).then(() => {
       console.log("MongoDB Conectado!!!");
     }).catch((erro) => {

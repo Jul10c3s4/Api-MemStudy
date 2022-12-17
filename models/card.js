@@ -27,6 +27,8 @@ const CardSchema = mongoose.Schema({
 
 mongoose.model("cards", CardSchema)
 
+
+
 /*const card = mongoose.model("cards")
 
 new card({
