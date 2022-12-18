@@ -49,7 +49,7 @@ router.get("/:id", async (req, res) =>{
   try{
     const card = await Card.findOne({_id: id})
     if(!card){
-      res.status(422).json({messagem: "usuário ão encontrado!"})
+      res.status(422).json({messagem: "card não encontrado!"})
       return
     }
     res.status(200).json(card)
@@ -82,20 +82,22 @@ if(updateCard.matchedCount === 0){
   }
 })
 
-router.delete("/:id", async (req, res) =>{
-  const id = req.params.id
-   const card = await Card.findOne({_id: id})
+router.delete("/:titulo/:descricao", async (req, res) =>{
+  //const titulo = req.params.titulo
+  const titulo = req.params.titulo
+  const descricao = req.params.descricao
+   const card = await Card.findOne({descricao: descricao, titulo: titulo})
     if(!card){
-      res.status(422).json({messagem: "usuário não encontrado!"})
+      res.status(422).json({messagem: "card não encontrado!"})
       return
     }
   try{
-    await Card.deleteOne({_id: id})
+    await Card.deleteOne({descricao: descricao, titulo: titulo})
     res.status(200).json({messagem: "usuário removido!"})
   }catch(error){
     res.status(500).json({erro: error})
   }
-  
 })
+
 
 module.exports = router
