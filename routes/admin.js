@@ -58,8 +58,9 @@ router.get("/:id", async (req, res) =>{
   }
 })
 
-router.patch("/:id", async(req, res) => {
-  const id = req.params.id
+router.put("/:titulo/:descricao", async(req, res) => {
+  const Titulo = req.params.titulo
+  const Descricao = req.params.descricao
 
   const {titulo, assunto, descricao} = req.body
 
@@ -70,9 +71,10 @@ router.patch("/:id", async(req, res) => {
   }
 
   try{
-    const updatedCard = await Card.updateOne({_id: id}, card)
-    console.log(updateCard)
-if(updateCard.matchedCount === 0){
+    const updatedCard = await Card.updateOne({titulo: Titulo, descricao: Descricao}, card)
+    console.log(updatedCard)
+
+if(updatedCard.matchedCount === 0){
   res.status(422).json({message: "card atualizado!"})
   return
 }
