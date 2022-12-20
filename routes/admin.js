@@ -42,14 +42,14 @@ router.post("/add", async (req, res) => {
   }
 })
 
-router.get("/:id", async (req, res) =>{
+router.get("/:descricao", async (req, res) =>{
   //extrair dados da requisição pela url 
-  const id = req.params.id
+  const descricao = req.params.descricao
 
   try{
-    const card = await Card.findOne({_id: id})
+    const card = await Card.findOne({descricao: descricao})
     if(!card){
-      res.status(422).json({messagem: "card não encontrado!"})
+      res.status(422).json({messagem: "usuário não encontrado!"})
       return
     }
     res.status(200).json(card)
@@ -75,7 +75,7 @@ router.put("/:titulo/:descricao", async(req, res) => {
     console.log(updatedCard)
 
 if(updatedCard.matchedCount === 0){
-  res.status(422).json({message: "card atualizado!"})
+  res.status(422).json({message: "card não encontrado!"})
   return
 }
     res.status(200).json(card)
